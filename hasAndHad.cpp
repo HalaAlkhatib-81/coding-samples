@@ -6,7 +6,7 @@
 using namespace std;
 
 
-struct compare {
+struct compare {//struct to use for comparasion
 	bool operator()(const string& a, const string& b) {
 		if (a.length() == b.length()) return a < b;
 		return a.length() < b.length();
@@ -24,7 +24,7 @@ int main(){
     cin >> w;
     while(not quit){
             while(not(w == "END" or w == "QUIT")){
-                if(s.count(w)) {        
+                if(s.count(w)) {       
                     s.erase(w);
                     g.insert(w);
                 }   
