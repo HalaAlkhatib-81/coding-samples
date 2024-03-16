@@ -2,25 +2,27 @@
 #include <vector>
 #include <map>
 using namespace std;
+/*this program takes an integer matrix and compares all its elements, returning the k-th smallest element in it
+the first elements of each subvector are compared and inserted to a map, where they are ordered. Then the k-th element is printed*/
 
     typedef vector<int> VE;
     typedef vector<VE> VVE;
 
 int k_esim(int k, const VVE& V){
-  map<int,int> a; //mapa donde guardamos: first = elemento a comparar; second = fila del elemento
+  map<int,int> a; //map where we store the following. first = the element we'll compare; second = the row where said element is located
   for(int i = 0; i < V.size(); ++i){
     if(not V[i].empty()) 
-        a[V[i][0]] = i; //los elementos de cada fila se guardan de menor a mayor en a
+        a[V[i][0]] = i; //the first integer of each subvector is stored in the map
   }  
-  pair<int, int> res; //pair que usaremos para guardar el resultado
-  VE it(V.size(), 1);
+  pair<int, int> res; //the result is stored in this pair
+  VE it(V.size(), 1); 
 
   while(k--){
-    res = *a.begin(); //elemento más pequeño de a
+    res = *a.begin(); //the smallest element in the map
     if(V[res.second].size() > it[res.second])
-      a[V[res.second][it[res.second]++]] = res.second; // si siguen habiendo elementos en la fila, se añade el siguiente elemento a a
+      a[V[res.second][it[res.second]++]] = res.second; // if any integer remain in the subvector where this integer was, they're stored in the map
       a.erase(a.begin());
-  } // esta operación se realiza hasta el el k-esimo elemento quede en el principio. cuando ya quede ahí, retornamos res.first
+  } // this iteration will be executed until the k-th element is at the beginning. The value will then be the return value of this function
   return res.first;
 }
 
